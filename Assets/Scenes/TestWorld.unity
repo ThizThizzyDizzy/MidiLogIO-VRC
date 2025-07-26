@@ -207,15 +207,12 @@ MonoBehaviour:
   commands:
   - make the floor red
   - make the floor blue
-  - system call generate steel element sphere shape release
   targetBehaviors:
-  - {fileID: 869847398}
   - {fileID: 869847398}
   - {fileID: 869847398}
   targetEvents:
   - Red
   - Blue
-  - Red
   io: {fileID: 8078687644671051237}
 --- !u!1 &869847393
 GameObject:
