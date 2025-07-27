@@ -1,6 +1,9 @@
 ﻿using MidiLogIO.Receiver;
 
-public abstract class MidiLogConverter<T, V> : MidiLogReceiver<T>
+namespace MidiLogIO.Converter
 {
-    public MidiLogReceiver<V> receiver;
+    public abstract class MidiLogConverter<T, V> : MidiLogReceiver<T>
+    {
+        public MidiLogReceiver<V> receiver;
+    }
 }

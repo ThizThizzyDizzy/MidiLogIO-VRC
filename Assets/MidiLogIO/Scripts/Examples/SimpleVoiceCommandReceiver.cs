@@ -1,19 +1,25 @@
-﻿using MidiLogIO;
+﻿using MidiLogIO.Receiver;
 
-public class SimpleVoiceCommandReceiver : SimpleCommandReceiver
+namespace MidiLogIO.Voice
 {
-    public BaseMidiLogIO io;
-    public override void Receive(string value)
+    public class SimpleVoiceCommandReceiver : SimpleCommandReceiver
     {
-        if (value == "[MidiLogIO-Voice] INIT")
+        public BaseMidiLogIO io;
+
+        public override void Receive(string value)
         {
-            foreach (var command in commands)
+            if (value == "[MidiLogIO-Voice] INIT")
             {
-                io.SendLine($"[MidiLogIO-Voice] COMMAND - {command}");
-                io.SendLine($"[MidiLogIO-Voice] END INIT");
+                foreach (var command in commands)
+                {
+                    io.SendLine($"[MidiLogIO-Voice] COMMAND - {command}");
+                    io.SendLine($"[MidiLogIO-Voice] END INIT");
+                }
+
+                return;
             }
-            return;
+
+            base.Receive(value);
         }
-        base.Receive(value);
     }
 }

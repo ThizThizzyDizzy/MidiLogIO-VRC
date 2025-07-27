@@ -1,17 +1,20 @@
-﻿public class LineConverter : MidiLogConverter<byte, string>
+﻿namespace MidiLogIO.Converter
 {
-    private const char LINE_TERMINATOR = '\n';
-    private string buffer = "";
-
-    public override void Receive(byte b)
+    public class LineConverter : MidiLogConverter<byte, string>
     {
-        if (b == LINE_TERMINATOR)
-        {
-            receiver.Receive($"{buffer}");
-            buffer = "";
-            return;
-        }
+        private const char LINE_TERMINATOR = '\n';
+        private string buffer = "";
 
-        buffer += (char)b;
+        public override void Receive(byte b)
+        {
+            if (b == LINE_TERMINATOR)
+            {
+                receiver.Receive($"{buffer}");
+                buffer = "";
+                return;
+            }
+
+            buffer += (char)b;
+        }
     }
 }

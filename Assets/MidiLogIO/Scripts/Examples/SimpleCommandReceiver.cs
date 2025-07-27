@@ -1,24 +1,27 @@
-﻿using MidiLogIO.Receiver;
-using UnityEngine;
+﻿using UnityEngine;
 using VRC.Udon;
 
-public class SimpleCommandReceiver : MidiLogReceiver<string>
+namespace MidiLogIO.Receiver
 {
-    public string[] commands;
-    public UdonBehaviour[] targetBehaviors;
-    public string[] targetEvents;
-
-    public override void Receive(string value)
+    public class SimpleCommandReceiver : MidiLogReceiver<string>
     {
-        for (int i = 0; i < commands.Length; i++)
+        public string[] commands;
+        public UdonBehaviour[] targetBehaviors;
+        public string[] targetEvents;
+
+        public override void Receive(string value)
         {
-            if (value == commands[i])
+            for (int i = 0; i < commands.Length; i++)
             {
-                Debug.Log($"Received command: {value}, triggering custom event {targetEvents[i]} in {targetBehaviors[i].gameObject.name}");
-                targetBehaviors[i].SendCustomEvent(targetEvents[i]);
-                return;
+                if (value == commands[i])
+                {
+                    Debug.Log($"Received command: {value}, triggering custom event {targetEvents[i]} in {targetBehaviors[i].gameObject.name}");
+                    targetBehaviors[i].SendCustomEvent(targetEvents[i]);
+                    return;
+                }
             }
+
+            Debug.LogWarning($"Received invalid command: {value}");
         }
-        Debug.LogWarning($"Received invalid command: {value}");
     }
 }
