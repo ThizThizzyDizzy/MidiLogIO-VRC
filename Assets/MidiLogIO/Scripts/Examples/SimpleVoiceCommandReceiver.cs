@@ -13,8 +13,9 @@ namespace MidiLogIO.Voice
                 foreach (var command in commands)
                 {
                     io.SendLine($"[MidiLogIO-Voice] COMMAND - {command}");
-                    io.SendLine($"[MidiLogIO-Voice] END INIT");
                 }
+
+                io.SendLine($"[MidiLogIO-Voice] END INIT");
 
                 return;
             }
